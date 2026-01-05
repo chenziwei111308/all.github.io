@@ -100,7 +100,7 @@
     <div class="main-header">充放电系统开发室数字化智能化工具入口</div>
 
     <div class="section-container">
-        <!-- ✅ 第一区：AI智能体功能专区 -->
+        <!-- ✅ AI智能体功能专区 -->
         <div class="function-section">
             <div class="section-title"><i>🧠</i> AI智能体功能专区【登录后再点击即可进入】</div>
             <div class="card-wrapper">
@@ -123,7 +123,7 @@
             </div>
         </div>
 
-        <!-- ✅ 第二区：数据分析报告专区 -->
+        <!-- ✅ 数据分析报告专区 -->
         <div class="function-section">
             <div class="section-title"><i>📈</i> 数据分析报告专区</div>
             <div class="card-wrapper">
@@ -138,15 +138,15 @@
             </div>
         </div>
 
-        <!-- ✅ 第三区：工具软件下载专区（修复下载BUG+路径兼容） -->
+        <!-- ✅ 工具软件下载专区（核心修复） -->
         <div class="function-section">
             <div class="section-title"><i>🔧</i> 工具软件下载专区</div>
             <div class="card-wrapper">
-                <div class="app-card" onclick="openOrDownload('//10.4.9.25//Team//DELE2025_新能源系统开发室//03-充放电集成开发组//充放电主观体验及功能开发专业能力建设//1.充放电体验评价//工具//27930AnalyzerCore.exe', '报文解析助手.exe')">
+                <div class="app-card" onclick="openTool('//10.4.9.25//Team//DELE2025_新能源系统开发室//03-充放电集成开发组//充放电主观体验及功能开发专业能力建设//1.充放电体验评价//工具//27930AnalyzerCore.exe', '报文解析助手.exe')">
                     <img src="https://img.icons8.com/color/200/0066CC/package.png" class="app-icon">
                     <div class="app-name">报文解析助手</div>
                 </div>
-                <div class="app-card" onclick="openOrDownload('//10.4.9.25//Team//DELE2025_新能源系统开发室//03-充放电集成开发组//充放电主观体验及功能开发专业能力建设//1.充放电体验评价//工具//标准v7.exe', '主观体验助手.exe')">
+                <div class="app-card" onclick="openTool('//10.4.9.25//Team//DELE2025_新能源系统开发室//03-充放电集成开发组//充放电主观体验及功能开发专业能力建设//1.充放电体验评价//工具//标准v7.exe', '主观体验助手.exe')">
                     <img src="https://img.icons8.com/color/200/0066CC/package.png" class="app-icon">
                     <div class="app-name">主观体验助手</div>
                 </div>
@@ -154,20 +154,26 @@
         </div>
     </div>
 
-    <!-- ✅ 核心JS（位置正确：body结束标签前，功能完整） -->
     <script>
-        // 本地打开→直接启动；GitHub打开→强制下载（双环境兼容）
-        function openOrDownload(filePath, fileName) {
-            try {
-                window.open(filePath, '_blank');
-            } catch (e) {
-                const link = document.createElement('a');
-                link.href = filePath.replace(/\//g, "\\");
-                link.download = fileName;
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-                alert("✅ 已触发下载！\n下载完成后双击文件即可运行");
+        // ✅ 核心函数：自动识别环境，本地直开 | GitHub下载
+        function openTool(filePath, fileName) {
+            // 第一步：判断当前是【本地打开】还是【GitHub打开】
+            const isLocal = window.location.protocol === 'file:';
+            
+            if (isLocal) {
+                // ✅ 本地环境：执行你的原始逻辑 → 直接调取内网exe运行
+                const smbPath = filePath.replace(/\//g, "\\");
+                window.open(smbPath, '_blank');
+            } else {
+                // ✅ GitHub环境：强制触发下载 → 彻底解决拒绝访问
+                const downloadLink = document.createElement('a');
+                // 关键：拼接file协议，让浏览器识别为可下载文件
+                downloadLink.href = 'file:///' + filePath.replace(/\/\//g, '').replace(/\//g, "\\");
+                downloadLink.download = fileName;
+                document.body.appendChild(downloadLink);
+                downloadLink.click();
+                document.body.removeChild(downloadLink);
+                alert(`✅ ${fileName} 下载已启动！\n✅ 下载完成后双击文件即可运行`);
             }
         }
     </script>
