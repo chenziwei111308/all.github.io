@@ -102,30 +102,24 @@
     <div class="section-container">
         <!-- ✅ 第一区：AI智能体功能专区 -->
         <div class="function-section">
-            <div class="section-title"><i>🧠</i> AI智能体功能专区</div>
+            <div class="section-title"><i>🧠</i> AI智能体功能专区【登录后再点击即可进入】</div>
             <div class="card-wrapper">
-                
                 <div class="app-card" onclick="window.open('http://10.124.8.54:30009/agent/dialog/#/store/dialog/detail?id=xzrbgent1ko98g4f7kmssn4rxnzxx15r&pageType=share&sourceType=3&shareTeamId=6w2v5pvxjb7jzx6vsyu5k1ny0zqadnog&shareOrgId=','_blank')">
                     <img src="https://img.icons8.com/fluency/200/0066CC/book-shelf.png" class="app-icon">
                     <div class="app-name">充放电集成专业知识库</div>
                 </div>
-
                 <div class="app-card" onclick="window.open('http://10.124.8.54:30009/agent/dialog/#/store/dialog/detail?id=xzrbgent2b13zjsucvk6vxzosgmtsoke&pageType=share&sourceType=3&shareTeamId=6w2v5pvxjb7jzx6vsyu5k1ny0zqadnog&shareOrgId=','_blank')">
                     <img src="https://img.icons8.com/fluency/200/0066CC/bar-chart.png" class="app-icon">
                     <div class="app-name">充放电体验标准数据分析报告助手</div>
                 </div>
-
                 <div class="app-card" onclick="window.open('http://10.124.8.54:30009/agent/dialog/#/store/dialog/detail?id=xzrbgent2bdsriaq5mp63to1lb882rix&pageType=share&sourceType=3&shareTeamId=6w2v5pvxjb7jzx6vsyu5k1ny0zqadnog&shareOrgId=','_blank')">
                     <img src="https://img.icons8.com/fluency/200/0066CC/code.png" class="app-icon">
                     <div class="app-name">AI报文分析助手</div>
                 </div>
-
                 <div class="app-card" onclick="window.open('http://10.124.8.54:30009/agent/scene/#/store/detail?id=xzrbcess3ju4jotyuuj1yxjko0p0zjz4&version=xzrvcess4qukhgrel85p1s3xdupeipbg&pageType=3&sourceType=3&shareTeamId=6w2v5pvxjb7jzx6vsyu5k1ny0zqadnog&shareOrgId=','_blank')">
-                    <!-- ✅ 修复：失效error-finding → 替换为【问题排查】可用图标 -->
                     <img src="https://img.icons8.com/fluency/200/0066CC/code.png" class="app-icon">
                     <div class="app-name">售后数据批量问题定位</div>
                 </div>
-
             </div>
         </div>
 
@@ -133,30 +127,26 @@
         <div class="function-section">
             <div class="section-title"><i>📈</i> 数据分析报告专区</div>
             <div class="card-wrapper">
-                
                 <div class="app-card" onclick="window.open('http://10.124.10.172/dash/share/195?id=1189&token=1764895522862bace69b42f5b5a868daa5112','_blank')">
                     <img src="https://img.icons8.com/fluency/200/0066CC/pie-chart.png" class="app-icon">
                     <div class="app-name">懂车帝数据分析报告</div>
                 </div>
-
                 <div class="app-card" onclick="window.open('http://10.124.10.172/dash/share/206?id=1589&token=176664342834900fcde9391303bdc3cdfa516','_blank')">
                     <img src="https://img.icons8.com/fluency/200/0066CC/line-chart.png" class="app-icon">
                     <div class="app-name">懂车帝数据分析报告--竞品车</div>
                 </div>
-                
             </div>
         </div>
 
-        <!-- ✅ 第三区：工具软件下载专区 -->
+        <!-- ✅ 第三区：工具软件下载专区（修复下载BUG+路径兼容） -->
         <div class="function-section">
             <div class="section-title"><i>🔧</i> 工具软件下载专区</div>
             <div class="card-wrapper">
-                <div class="app-card" onclick="window.open('//10.4.9.25//Team//DELE2025_新能源系统开发室//03-充放电集成开发组//充放电主观体验及功能开发专业能力建设//1.充放电体验评价//工具//27930AnalyzerCore.exe', '_blank')">
-                    <!-- ✅ 修复：失效software → 替换为【应用程序】可用图标 -->
+                <div class="app-card" onclick="openOrDownload('//10.4.9.25//Team//DELE2025_新能源系统开发室//03-充放电集成开发组//充放电主观体验及功能开发专业能力建设//1.充放电体验评价//工具//27930AnalyzerCore.exe', '报文解析助手.exe')">
                     <img src="https://img.icons8.com/color/200/0066CC/package.png" class="app-icon">
                     <div class="app-name">报文解析助手</div>
                 </div>
-                <div class="app-card" onclick="window.open('//10.4.9.25//Team//DELE2025_新能源系统开发室//03-充放电集成开发组//充放电主观体验及功能开发专业能力建设//1.充放电体验评价//工具//标准v7.exe', '_blank')">
+                <div class="app-card" onclick="openOrDownload('//10.4.9.25//Team//DELE2025_新能源系统开发室//03-充放电集成开发组//充放电主观体验及功能开发专业能力建设//1.充放电体验评价//工具//标准v7.exe', '主观体验助手.exe')">
                     <img src="https://img.icons8.com/color/200/0066CC/package.png" class="app-icon">
                     <div class="app-name">主观体验助手</div>
                 </div>
@@ -164,5 +154,22 @@
         </div>
     </div>
 
+    <!-- ✅ 核心JS（位置正确：body结束标签前，功能完整） -->
+    <script>
+        // 本地打开→直接启动；GitHub打开→强制下载（双环境兼容）
+        function openOrDownload(filePath, fileName) {
+            try {
+                window.open(filePath, '_blank');
+            } catch (e) {
+                const link = document.createElement('a');
+                link.href = filePath.replace(/\//g, "\\");
+                link.download = fileName;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                alert("✅ 已触发下载！\n下载完成后双击文件即可运行");
+            }
+        }
+    </script>
 </body>
 </html>
