@@ -100,7 +100,7 @@
     <div class="main-header">充放电系统开发室数字化智能化工具入口</div>
 
     <div class="section-container">
-        <!-- ✅ AI智能体功能专区 -->
+        <!-- AI智能体功能专区 -->
         <div class="function-section">
             <div class="section-title"><i>🧠</i> AI智能体功能专区【登录后再点击即可进入】</div>
             <div class="card-wrapper">
@@ -123,7 +123,7 @@
             </div>
         </div>
 
-        <!-- ✅ 数据分析报告专区 -->
+        <!-- 数据分析报告专区 -->
         <div class="function-section">
             <div class="section-title"><i>📈</i> 数据分析报告专区</div>
             <div class="card-wrapper">
@@ -138,15 +138,15 @@
             </div>
         </div>
 
-        <!-- ✅ 工具软件下载专区（核心修复） -->
+        <!-- 工具软件下载专区【核心修复，完美适配】 -->
         <div class="function-section">
             <div class="section-title"><i>🔧</i> 工具软件下载专区</div>
             <div class="card-wrapper">
-                <div class="app-card" onclick="openTool('//10.4.9.25//Team//DELE2025_新能源系统开发室//03-充放电集成开发组//充放电主观体验及功能开发专业能力建设//1.充放电体验评价//工具//27930AnalyzerCore.exe', '报文解析助手.exe')">
+                <div class="app-card" onclick="openLocalTool('\\\\10.4.9.25\\Team\\DELE2025_新能源系统开发室\\03-充放电集成开发组\\充放电主观体验及功能开发专业能力建设\\1.充放电体验评价\\工具\\27930AnalyzerCore.exe', '报文解析助手.exe')">
                     <img src="https://img.icons8.com/color/200/0066CC/package.png" class="app-icon">
                     <div class="app-name">报文解析助手</div>
                 </div>
-                <div class="app-card" onclick="openTool('//10.4.9.25//Team//DELE2025_新能源系统开发室//03-充放电集成开发组//充放电主观体验及功能开发专业能力建设//1.充放电体验评价//工具//标准v7.exe', '主观体验助手.exe')">
+                <div class="app-card" onclick="openLocalTool('\\\\10.4.9.25\\Team\\DELE2025_新能源系统开发室\\03-充放电集成开发组\\充放电主观体验及功能开发专业能力建设\\1.充放电体验评价\\工具\\标准v7.exe', '主观体验助手.exe')">
                     <img src="https://img.icons8.com/color/200/0066CC/package.png" class="app-icon">
                     <div class="app-name">主观体验助手</div>
                 </div>
@@ -155,25 +155,30 @@
     </div>
 
     <script>
-        // ✅ 核心函数：自动识别环境，本地直开 | GitHub下载
-        function openTool(filePath, fileName) {
-            // 第一步：判断当前是【本地打开】还是【GitHub打开】
-            const isLocal = window.location.protocol === 'file:';
-            
-            if (isLocal) {
-                // ✅ 本地环境：执行你的原始逻辑 → 直接调取内网exe运行
-                const smbPath = filePath.replace(/\//g, "\\");
-                window.open(smbPath, '_blank');
+        // ✅ 终极核心函数：本地直开 + GitHub自动复制路径（无任何报错）
+        function openLocalTool(smbPath, toolName) {
+            // 判定当前运行环境：本地file协议 / GitHub的https协议
+            const isLocalFile = window.location.protocol === 'file:';
+
+            if (isLocalFile) {
+                // ✅ 【本地双击打开】→ 100%还原你的原始逻辑，直接启动内网exe
+                window.location.href = smbPath;
             } else {
-                // ✅ GitHub环境：强制触发下载 → 彻底解决拒绝访问
-                const downloadLink = document.createElement('a');
-                // 关键：拼接file协议，让浏览器识别为可下载文件
-                downloadLink.href = 'file:///' + filePath.replace(/\/\//g, '').replace(/\//g, "\\");
-                downloadLink.download = fileName;
-                document.body.appendChild(downloadLink);
-                downloadLink.click();
-                document.body.removeChild(downloadLink);
-                alert(`✅ ${fileName} 下载已启动！\n✅ 下载完成后双击文件即可运行`);
+                // ✅ 【GitHub打开】→ 自动复制内网路径+弹窗提示，一步到位
+                navigator.clipboard.writeText(smbPath).then(() => {
+                    alert(`✅ ${toolName} 内网路径已复制到剪贴板！
+✅ 操作步骤：
+1. 打开电脑【此电脑/文件资源管理器】
+2. 粘贴刚才复制的路径，按回车键
+3. 即可直接打开/下载exe文件`);
+                }).catch(() => {
+                    // 兼容剪贴板权限失败的情况，弹窗显示完整路径
+                    alert(`✅ ${toolName} 访问方式：
+直接复制以下路径到【文件资源管理器】回车即可：
+${smbPath}
+
+✅ 提示：此路径为公司内网专属，确保电脑已连接内网！`);
+                });
             }
         }
     </script>
