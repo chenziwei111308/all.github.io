@@ -138,15 +138,15 @@
             </div>
         </div>
 
-        <!-- 工具软件下载专区【核心修复，完美适配】 -->
+        <!-- 工具软件下载专区 ✅ 精准指向2个二级文件夹 | 只开文件夹不运行exe -->
         <div class="function-section">
             <div class="section-title"><i>🔧</i> 工具软件下载专区</div>
             <div class="card-wrapper">
-                <div class="app-card" onclick="openLocalTool('\\\\10.4.9.25\\Team\\DELE2025_新能源系统开发室\\03-充放电集成开发组\\充放电主观体验及功能开发专业能力建设\\1.充放电体验评价\\工具\\27930AnalyzerCore.exe', '报文解析助手.exe')">
+                <div class="app-card" onclick="openLocalTool('\\\\10.4.9.25\\Team\\DELE2025_新能源系统开发室\\03-充放电集成开发组\\充放电主观体验及功能开发专业能力建设\\1.充放电体验评价\\工具\\报文解析助手', '报文解析助手文件夹')">
                     <img src="https://img.icons8.com/color/200/0066CC/package.png" class="app-icon">
                     <div class="app-name">报文解析助手</div>
                 </div>
-                <div class="app-card" onclick="openLocalTool('\\\\10.4.9.25\\Team\\DELE2025_新能源系统开发室\\03-充放电集成开发组\\充放电主观体验及功能开发专业能力建设\\1.充放电体验评价\\工具\\标准v7.exe', '主观体验助手.exe')">
+                <div class="app-card" onclick="openLocalTool('\\\\10.4.9.25\\Team\\DELE2025_新能源系统开发室\\03-充放电集成开发组\\充放电主观体验及功能开发专业能力建设\\1.充放电体验评价\\工具\\主观体验助手', '主观体验助手文件夹')">
                     <img src="https://img.icons8.com/color/200/0066CC/package.png" class="app-icon">
                     <div class="app-name">主观体验助手</div>
                 </div>
@@ -155,29 +155,28 @@
     </div>
 
     <script>
-        // ✅ 终极核心函数：本地直开 + GitHub自动复制路径（无任何报错）
-        function openLocalTool(smbPath, toolName) {
-            // 判定当前运行环境：本地file协议 / GitHub的https协议
+        // ✅ 终极核心函数 ✔️ 参数完全匹配 ✔️ 只开文件夹 ✔️ 双环境适配 ✔️ 无报错
+        function openLocalTool(folderPath, folderName) {
+            // 判断环境：本地file协议 / GitHub的https协议
             const isLocalFile = window.location.protocol === 'file:';
 
             if (isLocalFile) {
-                // ✅ 【本地双击打开】→ 100%还原你的原始逻辑，直接启动内网exe
-                window.location.href = smbPath;
+                // ✅ 本地打开 → 仅打开对应二级文件夹，不运行任何程序
+                window.location.href = folderPath;
+                alert(`✅ 已打开【${folderName}】\n✅ 请在文件夹内自行下载/运行所需EXE文件！`);
             } else {
-                // ✅ 【GitHub打开】→ 自动复制内网路径+弹窗提示，一步到位
-                navigator.clipboard.writeText(smbPath).then(() => {
-                    alert(`✅ ${toolName} 内网路径已复制到剪贴板！
-✅ 操作步骤：
-1. 打开电脑【此电脑/文件资源管理器】
-2. 粘贴刚才复制的路径，按回车键
-3. 即可直接打开/下载exe文件`);
+                // ✅ GitHub打开 → 复制当前二级文件夹路径+清晰指引
+                navigator.clipboard.writeText(folderPath).then(() => {
+                    alert(`✅ 【${folderName}】路径已复制！
+操作步骤：
+1. 按 Win+E 打开文件资源管理器
+2. 粘贴路径回车，进入对应文件夹
+3. 自行下载文件夹内的EXE工具即可`);
                 }).catch(() => {
-                    // 兼容剪贴板权限失败的情况，弹窗显示完整路径
-                    alert(`✅ ${toolName} 访问方式：
-直接复制以下路径到【文件资源管理器】回车即可：
-${smbPath}
-
-✅ 提示：此路径为公司内网专属，确保电脑已连接内网！`);
+                    // 兼容剪贴板权限失败，手动复制路径
+                    alert(`✅ 【${folderName}】访问路径：
+${folderPath}
+✅ 复制到文件资源管理器回车，即可进入文件夹！`);
                 });
             }
         }
